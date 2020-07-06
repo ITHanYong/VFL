@@ -16,10 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self testConstraint];
+    [self addConstraint];
     
 }
-- (void)testConstraint {//测试布局
+- (void)addConstraint {//测试布局
     
     /*
      |:   表示父视图
@@ -54,15 +54,24 @@
     
     //由于AutoLayout布局和Autoresizing布局是冲突的,因此要使用AutoLayout必须要关闭Autoresizing
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
-    supView2.translatesAutoresizingMaskIntoConstraints = NO;
     supView1.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    //此语句的意思是 垂直方向: supView1距离父view的距离为 topMargin,
-    //supView1的垂直方向的宽度为50.0, supView2距离supView1为20, 并且高度也为50.0;
+    supView2.translatesAutoresizingMaskIntoConstraints = NO;
+    /*
+     supView1距离父视图top间距（200）
+     supView1的宽度（100）
+     底部距离supView2的间距（20）
+     的垂直方向的宽度（50）
+     supView2的高度（50）
+     */
     NSString *top = @"V:|-200-[supView1(100.0)]-20-[supView2(100.0)]";
-    //解释方法同上
+    /*
+     垂直方向: supView1距离父view 左边距（10）宽度（50）
+     */
     NSString *left = @"H:|-10-[supView1(50.0)]";
-    NSString *v2T = @"[supView2(60.0)]";
+    /*
+     supView2宽度（60）
+     */
+    NSString *v2T = @"[supView2(160.0)]";
     
     
     //此处需要对topMargin参数进行解释, 其实就是给topMargin赋值;
@@ -75,8 +84,6 @@
     [self.view addConstraints:v2Tc];
     [self.view addConstraints:s1T];
     [self.view addConstraints:s1L];
-
 }
-
 
 @end
